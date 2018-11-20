@@ -13,13 +13,11 @@ The .NET 4.7.2 application is executed with
 
 > IOBound.exe
  
-![Image](https://github.com/Alois-xx/IOBound/blob/master/src/images/IOBound_Net472.png)
-
 The .NET Core application as usual with 
 
 > dotnet IOBound.dll
 
-![Image](https://github.com/Alois-xx/IOBound/blob/master/src/images/IOBound_NetCore2.1.png)
+![Image](https://github.com/Alois-xx/IOBound/blob/master/src/images/OverView.png)
 
 ## Why? ##
 
