@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -165,8 +166,7 @@ namespace IOBound
 
         /// <summary>
         /// Read the file line by line and count the lines.
-        /// This is very fast because one never allocates long living objects. We always
-        /// need only one line in memory. 
+        /// This is very fast because one never allocates long living objects.
         /// </summary>
         private static int CountLines(string dataFile)
         {
@@ -334,6 +334,7 @@ namespace IOBound
         {
             var dobules = new List<double>();
             var ints = new List<int>();
+            char decimalChar = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
 
             using (var reader = new StreamReader(dataFile))
             {
@@ -344,6 +345,9 @@ namespace IOBound
                 while ((line = reader.ReadLine()) != null)
                 {
                     int len = line.Length;
+                    ix = 0;
+                    a = 0;
+                    b = 0;
                     fixed (char* ln = line)
                     {
                         while (ix < len && char.IsNumber(ln[ix]))
@@ -351,7 +355,7 @@ namespace IOBound
                             a = a * 10 + (ln[ix++] - '0');
                         }
 
-                        if (ln[ix] == ',')
+                        if (ln[ix] == decimalChar)
                         {
                             ix++;
                             long div = 1;
@@ -375,7 +379,7 @@ namespace IOBound
                         }
 
                         dobules.Add(d);
-                        ints.Add(ix);
+                        ints.Add(i);
                     }
                 }
             }
